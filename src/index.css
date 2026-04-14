@@ -1,0 +1,67 @@
+:root {
+  --space-base: 8px;
+  --s-1: calc(var(--space-base) * 1);
+  --s-2: calc(var(--space-base) * 2);
+  --s-3: calc(var(--space-base) * 3);
+  --s-4: calc(var(--space-base) * 4);
+  --s-5: calc(var(--space-base) * 5);
+  --radius-card: 20px;
+  --radius-input: 10px;
+  --shadow-card: 0 28px 64px -20px rgba(15, 23, 42, 0.2),
+    0 12px 28px rgba(15, 23, 42, 0.1);
+  --wms-primary-deep: #1c6bb8;
+  --wms-primary: #1f6fd0;
+  --wms-accent: #164f96;
+  --wms-input-border: #d6dce6;
+  --wms-input-focus: #1f6fd0;
+  --wms-error: #e53e3e;
+  --wms-text-primary: #121a24;
+  --wms-text-secondary: #66768a;
+  --wms-text-muted: #94a3b8;
+  --color-page: #0c121c;
+  --color-login-shell: #eef2f9;
+  --color-bg: #0b1018;
+  --color-surface: #feffff;
+  --color-text: var(--wms-text-primary);
+  --color-muted: var(--wms-text-secondary);
+  --color-accent: var(--wms-primary);
+  --color-accent-hover: #185aa3;
+  --color-border: var(--wms-input-border);
+  --color-error: var(--wms-error);
+  --color-error-bg: #fff5f5;
+  --focus-ring: 0 0 0 3px rgba(31, 111, 208, 0.22);
+  --bp-lg: 1024px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans SC", system-ui, -apple-system, "Segoe UI", Roboto,
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--color-text);
+  /* 整页底色与左栏暗部衔接，避免左右「两块屏」感 */
+  background: var(--color-page);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}

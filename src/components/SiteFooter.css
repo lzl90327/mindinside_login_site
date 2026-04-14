@@ -1,0 +1,72 @@
+/* 脱流浮层：非 footer 文档块、无整宽底栏；弱色小字无阴影 */
+.legal-float {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  overflow: visible;
+  z-index: 8;
+  pointer-events: none;
+}
+
+.legal-float__rail {
+  position: absolute;
+  left: 0;
+  bottom: max(10px, env(safe-area-inset-bottom, 0px));
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .legal-float__rail {
+    left: 58%;
+    width: 42%;
+    max-width: 42%;
+    justify-content: center;
+  }
+}
+
+.legal-float__cluster {
+  pointer-events: auto;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem 0.85rem;
+  max-width: calc(100% - 20px);
+  padding: 0 2px;
+  font-size: clamp(10px, 2.6vw, 11px);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: rgba(71, 85, 105, 0.68);
+}
+
+.legal-float__icp {
+  flex-shrink: 0;
+  color: rgba(71, 85, 105, 0.78);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.legal-float__icp:hover {
+  color: rgba(30, 41, 59, 0.9);
+  text-decoration: underline;
+}
+
+.legal-float__copyright {
+  font-weight: 400;
+  color: rgba(100, 116, 139, 0.62);
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .legal-float__cluster {
+    flex-wrap: nowrap;
+    gap: 0.5rem 1.1rem;
+  }
+}
