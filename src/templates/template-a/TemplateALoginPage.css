@@ -1,21 +1,15 @@
-.layout {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: #0c121c;
+/* TMS 主图强光区偏画面右侧，略左锚裁切，减轻与右栏接缝处的眩光冲突（不影响分栏比例） */
+.template-a-root[data-login-system="tms"] .visual-panel__img {
+  object-position: 22% 52%;
 }
 
-.layout__main {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  overflow: hidden;
+@media (min-width: 1024px) {
+  .template-a-root[data-login-system="tms"] .visual-panel__img {
+    object-position: 20% 50%;
+  }
 }
 
-/* 右侧：浅底 + 左缘深色桥接，与主图右缘合成「一整页」 */
+/* 模板 A：右侧浅底 + 左缘深色桥接，与主图右缘合成「一整页」 */
 .login-shell {
   position: relative;
   flex: 1 1 auto;
@@ -51,11 +45,6 @@
 }
 
 @media (min-width: 1024px) {
-  .layout__main {
-    flex-direction: row;
-    align-items: stretch;
-  }
-
   .login-shell {
     flex: 1 1 42%;
     max-width: 42%;

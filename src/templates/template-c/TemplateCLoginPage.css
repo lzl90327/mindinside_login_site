@@ -1,0 +1,195 @@
+/* 模板 C：全宽轻底 + 居中登录卡；与 A 分栏解耦 */
+.template-c-root {
+  --template-c-bg0: #e8edf6;
+  --template-c-bg1: #f0f3fa;
+  --template-c-bg2: #e2e8f4;
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-4) var(--s-3)
+    max(calc(var(--s-4) + 22px), calc(14px + env(safe-area-inset-bottom, 0px)))
+    var(--s-3);
+  overflow: auto;
+  background: radial-gradient(
+      120% 90% at 50% -10%,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(241, 245, 252, 0.55) 42%,
+      transparent 70%
+    ),
+    linear-gradient(165deg, var(--template-c-bg1) 0%, var(--template-c-bg0) 48%, var(--template-c-bg2) 100%);
+}
+
+.template-c__ambient-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  /* 弱底图：可感知但不抢登录卡；与 wash / 网格叠层配合 */
+  opacity: 0.22;
+  filter: saturate(0.78) contrast(1.02) brightness(1.03);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/*
+ * HR 与 BMS 共用模板 C 叠层时，底图被压到约 22% 不透明 + 去饱和 + 固定渐变底，
+ * 两张「轻秩序」素材在屏上极易看起来「没换图」。略提高 HR 底图与略弱网格，
+ * 便于专用 `hr-ambient.webp` 被感知；BMS 不变。
+ */
+.template-c-root[data-login-system="hr"] .template-c__ambient-img {
+  opacity: 0.38;
+  filter: saturate(0.92) contrast(1.04) brightness(1.04);
+}
+
+.template-c-root[data-login-system="hr"] .template-c__geometry {
+  opacity: 0.32;
+}
+
+/*
+ * AMS（asset）：与 BMS/HR 冷蓝 + 实拍弱底图、CRM 模板 B 暗底均拉开。
+ * 无栅格图，靠暖石青灰渐变 + 偏绿松 wash + 更细网格，保持模板 C 克制与单卡主焦点。
+ */
+.template-c-root[data-login-system="asset"] {
+  --template-c-bg0: #e3e9e5;
+  --template-c-bg1: #f0f5f1;
+  --template-c-bg2: #dbe6df;
+  background: radial-gradient(
+      118% 88% at 50% -8%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(236, 244, 238, 0.62) 44%,
+      transparent 72%
+    ),
+    linear-gradient(168deg, var(--template-c-bg1) 0%, var(--template-c-bg0) 46%, var(--template-c-bg2) 100%);
+}
+
+.template-c-root[data-login-system="asset"] .template-c__wash {
+  background: radial-gradient(
+      72% 48% at 18% 22%,
+      rgba(45, 112, 96, 0.055) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      70% 56% at 50% 100%,
+      rgba(22, 95, 86, 0.072) 0%,
+      transparent 56%
+    );
+}
+
+.template-c-root[data-login-system="asset"] .template-c__noise {
+  opacity: 0.038;
+  mix-blend-mode: multiply;
+}
+
+.template-c-root[data-login-system="asset"] .template-c__geometry {
+  opacity: 0.34;
+  background-image: linear-gradient(
+      rgba(24, 38, 32, 0.038) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(24, 38, 32, 0.038) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(
+    ellipse 78% 64% at 50% 44%,
+    #000 22%,
+    transparent 76%
+  );
+}
+
+/* AMS 专用弱底图：略高于默认 0.22，使暖松石向素材可感知，仍弱于 HR 提亮 */
+.template-c-root[data-login-system="asset"] .template-c__ambient-img {
+  opacity: 0.3;
+  object-position: 50% 44%;
+  filter: saturate(0.88) contrast(1.02) brightness(1.02);
+}
+
+.template-c__wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    70% 55% at 50% 100%,
+    rgba(31, 111, 208, 0.06) 0%,
+    transparent 55%
+  );
+}
+
+/* 微噪点：内联 SVG，无外部请求 */
+.template-c__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+.template-c__geometry {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* 略降强度，让弱底图多透出一分秩序感 */
+  opacity: 0.42;
+  background-image: linear-gradient(
+      rgba(15, 23, 42, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 45%, #000 20%, transparent 72%);
+}
+
+.template-c__stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(18px, 3.2vh, 28px);
+}
+
+.template-c__brand {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* BrandMark 默认面向暗色主视觉区；模板 C 为浅底居中条 */
+.template-c__brand .brand-mark {
+  position: static;
+  gap: 10px;
+}
+
+.template-c__brand .brand-mark__icon {
+  height: clamp(28px, 3.6vw, 36px);
+  max-height: 36px;
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.12));
+}
+
+.template-c__brand .brand-mark__wordmark {
+  font-size: clamp(14px, 1.65vw, 17px);
+  font-weight: 600;
+  color: #334155;
+  text-shadow: none;
+}
+
+/* 单卡页：取消 A 分栏下右栏专用侧向投影，改均衡浮起 */
+@media (min-width: 1024px) {
+  .template-c-root .login-card-root {
+    margin-inline: auto;
+    filter: drop-shadow(0 22px 48px rgba(15, 23, 42, 0.1));
+  }
+}

@@ -27,6 +27,22 @@
     max-width: 42%;
     justify-content: center;
   }
+
+  /* 模板 C 全宽单卡：法务条水平居中，不复用 A 分栏右栏锚点 */
+  .layout:has(.template-c-root) .legal-float__rail {
+    left: 0;
+    width: 100%;
+    max-width: none;
+    justify-content: center;
+  }
+
+  /* 模板 B 全幅居中卡：备案与版权同一行整体水平居中 */
+  .layout:has(.template-b-root) .legal-float__rail {
+    left: 0;
+    width: 100%;
+    max-width: none;
+    justify-content: center;
+  }
 }
 
 .legal-float__cluster {
@@ -43,6 +59,12 @@
   line-height: 1.35;
   letter-spacing: 0.01em;
   color: rgba(71, 85, 105, 0.68);
+}
+
+/* 模板 B：ICP 与版权强制同一行，与 rail 全宽居中配合 */
+.layout:has(.template-b-root) .legal-float__cluster {
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .legal-float__icp {

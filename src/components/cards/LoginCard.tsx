@@ -12,6 +12,7 @@ export type LoginCardProps = {
   systemName: string;
   subtitle: string;
   fields: LoginField[];
+  submitButtonLabel?: string;
   onSubmit: (values: Record<string, string>) => void | Promise<void>;
   slots?: {
     captcha?: ReactNode;
@@ -28,6 +29,7 @@ export function LoginCard({
   systemName,
   subtitle,
   fields,
+  submitButtonLabel = "登录",
   onSubmit,
   slots,
   rememberMe,
@@ -156,7 +158,7 @@ export function LoginCard({
               disabled={submitting}
               aria-busy={submitting}
             >
-              登录
+              {submitButtonLabel}
             </button>
 
             {slots?.footerLinks ? (

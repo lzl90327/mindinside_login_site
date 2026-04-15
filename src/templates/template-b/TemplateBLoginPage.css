@@ -1,0 +1,151 @@
+/* 模板 B：全幅铺底 + 居中浮卡；与 A 分栏、C 浅底单卡解耦 */
+
+.template-b-root {
+  --template-b-fallback: #0a0f16;
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-4) var(--s-3)
+    max(calc(var(--s-4) + 22px), calc(14px + env(safe-area-inset-bottom, 0px)))
+    var(--s-3);
+  overflow: auto;
+  background: var(--template-b-fallback);
+}
+
+.template-b__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* 覆盖 VisualPanel 在模板 A 下的分栏宽高，使主图全幅 cover */
+.template-b-root .template-b__backdrop .visual-panel {
+  position: absolute;
+  inset: 0;
+  flex: none;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .template-b-root .template-b__backdrop .visual-panel {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    min-height: 100%;
+  }
+
+  .template-b-root .visual-panel__img {
+    object-position: 50% 48%;
+  }
+}
+
+/* 去掉通往右侧浅栏的「接缝 bridge」，改为整体暗角与上下收边 */
+.template-b-root .visual-panel__bridge {
+  background: radial-gradient(
+      120% 92% at 50% 44%,
+      transparent 32%,
+      rgba(6, 10, 16, 0.22) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 10, 16, 0.38) 0%,
+      transparent 30%,
+      transparent 65%,
+      rgba(4, 8, 14, 0.42) 100%
+    );
+}
+
+/* 登录卡中心区略压暗，保证白底表单可读；层级低于 BrandMark（z-index: 4） */
+.template-b__readwash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse min(96%, 760px) min(82%, 680px) at 50% 50%,
+    rgba(8, 12, 22, 0.26) 0%,
+    rgba(8, 12, 22, 0.09) 55%,
+    transparent 74%
+  );
+}
+
+.template-b__stage {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+  .template-b-root .login-card-root {
+    margin-inline: auto;
+    filter: drop-shadow(0 22px 48px rgba(15, 23, 42, 0.14));
+  }
+}
+
+/* 统一业务平台（中枢入口）：略稳中心读洗与卡片层次，不改模板 B 分栏与卡位 */
+.template-b-root[data-login-system="master"] .template-b__readwash {
+  background: radial-gradient(
+      ellipse min(96%, 780px) min(82%, 700px) at 50% 50%,
+      rgba(6, 10, 18, 0.32) 0%,
+      rgba(8, 12, 22, 0.12) 52%,
+      transparent 76%
+    ),
+    radial-gradient(
+      120% 88% at 50% 108%,
+      rgba(4, 8, 16, 0.18) 0%,
+      transparent 55%
+    );
+}
+
+/* 统一业务平台：轻半透明悬浮卡（无 backdrop-filter，避免毛玻璃炫技） */
+.template-b-root[data-login-system="master"] .login-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(246, 249, 253, 0.82) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 1px 0 rgba(12, 22, 44, 0.05),
+    0 22px 56px -22px rgba(4, 14, 36, 0.32),
+    0 10px 28px rgba(6, 18, 46, 0.2);
+}
+
+.template-b-root[data-login-system="master"] .login-card__input {
+  background: #ffffff;
+  border-color: rgba(148, 163, 184, 0.52);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+.template-b-root[data-login-system="master"] .login-card__input:hover:not(:disabled) {
+  background: #ffffff;
+  border-color: #b8c2d4;
+}
+
+.template-b-root[data-login-system="master"] .login-card__input:focus-visible {
+  background: #ffffff;
+}
+
+.template-b-root[data-login-system="master"] .login-card__input:disabled {
+  background: #f1f4f8;
+}
+
+@media (min-width: 1024px) {
+  .template-b-root[data-login-system="master"] .login-card-root {
+    filter: drop-shadow(0 20px 48px rgba(4, 14, 32, 0.2));
+  }
+}

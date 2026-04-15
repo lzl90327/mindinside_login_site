@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { BrandMark } from "@/components/brand/BrandMark";
+import type { LoginBrandMarkConfig } from "@/types/login-system";
 import "./VisualPanel.css";
 
 export type VisualPanelProps = {
-  /** 默认 /assets/login/wms-hero.webp */
-  imageSrc?: string;
-  imageAlt?: string;
+  imageSrc: string;
+  imageAlt: string;
+  brand: LoginBrandMarkConfig;
   /** LCP 场景可设 high */
   fetchPriority?: "high" | "low" | "auto";
   /** 是否 eager 加载首屏图 */
@@ -12,8 +14,9 @@ export type VisualPanelProps = {
 };
 
 export function VisualPanel({
-  imageSrc = "/assets/login/wms-hero.webp",
-  imageAlt = "WMS 仓储作业主视觉",
+  imageSrc,
+  imageAlt,
+  brand,
   fetchPriority = "high",
   priority = true,
 }: VisualPanelProps) {
@@ -34,16 +37,7 @@ export function VisualPanel({
       )}
       <div className="visual-panel__wash" aria-hidden />
       <div className="visual-panel__bridge" aria-hidden />
-      <div className="visual-panel__brand">
-        <img
-          className="visual-panel__brand-icon"
-          src="/assets/brand/mindinside-logo-small.png"
-          alt=""
-          decoding="async"
-          aria-hidden
-        />
-        <span className="visual-panel__brand-wordmark">MindInside</span>
-      </div>
+      <BrandMark iconSrc={brand.markIconSrc} wordmark={brand.markWordmark} />
     </div>
   );
 }
