@@ -10,10 +10,7 @@ export function WMSLoginPage() {
 
   return (
     <LoginShell legal={legal}>
-      {renderLoginTemplate(wmsLoginSystemConfig, async (values) => {
-        console.info("login submit", values);
-        await new Promise((r) => setTimeout(r, 400));
-      })}
+      {renderLoginTemplate(wmsLoginSystemConfig)}
     </LoginShell>
   );
 }

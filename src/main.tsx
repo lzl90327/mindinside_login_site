@@ -6,6 +6,7 @@ import "./index.css";
 import { AMSLoginPage } from "./pages/AMSLoginPage";
 import { BMSLoginPage } from "./pages/BMSLoginPage";
 import { CRMLoginPage } from "./pages/CRMLoginPage";
+import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { HRLoginPage } from "./pages/HRLoginPage";
 import { MasterLoginPage } from "./pages/MasterLoginPage";
 import { TMSLoginPage } from "./pages/TMSLoginPage";
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path={LOGIN_PATHS.hr} element={<HRLoginPage />} />
         <Route path={LOGIN_PATHS.asset} element={<AMSLoginPage />} />
         <Route path={LOGIN_PATHS.master} element={<MasterLoginPage />} />
+        <Route path="/forgot-password/:systemId" element={<ForgotPasswordPage />} />
         <Route path="/" element={<Navigate to={LOGIN_PATHS.wms} replace />} />
       </Routes>
     </BrowserRouter>

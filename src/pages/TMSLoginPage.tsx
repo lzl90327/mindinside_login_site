@@ -10,10 +10,7 @@ export function TMSLoginPage() {
 
   return (
     <LoginShell legal={legal}>
-      {renderLoginTemplate(tmsLoginSystemConfig, async (values) => {
-        console.info("login submit", values);
-        await new Promise((r) => setTimeout(r, 400));
-      })}
+      {renderLoginTemplate(tmsLoginSystemConfig)}
     </LoginShell>
   );
 }

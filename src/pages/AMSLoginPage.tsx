@@ -10,10 +10,7 @@ export function AMSLoginPage() {
 
   return (
     <LoginShell legal={legal}>
-      {renderLoginTemplate(assetLoginSystemConfig, async (values) => {
-        console.info("login submit", values);
-        await new Promise((r) => setTimeout(r, 400));
-      })}
+      {renderLoginTemplate(assetLoginSystemConfig)}
     </LoginShell>
   );
 }

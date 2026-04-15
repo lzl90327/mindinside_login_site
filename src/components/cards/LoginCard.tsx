@@ -12,6 +12,8 @@ export type LoginCardProps = {
   systemName: string;
   subtitle: string;
   fields: LoginField[];
+  /** 进入页时的预填（记住账号密码 / last_tenant_id 等） */
+  defaultValues?: Record<string, string>;
   submitButtonLabel?: string;
   onSubmit: (values: Record<string, string>) => void | Promise<void>;
   slots?: {
@@ -29,6 +31,7 @@ export function LoginCard({
   systemName,
   subtitle,
   fields,
+  defaultValues,
   submitButtonLabel = "登录",
   onSubmit,
   slots,
@@ -38,9 +41,15 @@ export function LoginCard({
   envSwitcher,
 }: LoginCardProps) {
   const formId = useId();
-  const [values, setValues] = useState<Record<string, string>>(() =>
-    Object.fromEntries(fields.map((f) => [f.id, ""])),
-  );
+  const [values, setValues] = useState<Record<string, string>>(() => {
+    const base = Object.fromEntries(fields.map((f) => [f.id, ""]));
+    if (!defaultValues) return base;
+    const next = { ...base };
+    for (const [k, v] of Object.entries(defaultValues)) {
+      if (k in next) next[k] = v;
+    }
+    return next;
+  });
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -66,8 +75,12 @@ export function LoginCard({
     setSubmitting(true);
     try {
       await onSubmit(values);
-    } catch {
-      setFormError("登录失败，请稍后重试。");
+    } catch (err) {
+      const message =
+        err instanceof Error && err.message.trim()
+          ? err.message.trim()
+          : "登录失败，请稍后重试。";
+      setFormError(message);
     } finally {
       setSubmitting(false);
     }

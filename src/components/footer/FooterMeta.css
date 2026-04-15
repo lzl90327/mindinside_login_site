@@ -43,6 +43,14 @@
     max-width: none;
     justify-content: center;
   }
+
+  /* 忘记密码流程页：相对整页水平居中，不复用登录分栏右侧 42% 锚点 */
+  .layout:has(.forgot-flow) .legal-float__rail {
+    left: 0;
+    width: 100%;
+    max-width: none;
+    justify-content: center;
+  }
 }
 
 .legal-float__cluster {

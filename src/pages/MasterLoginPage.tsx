@@ -10,10 +10,7 @@ export function MasterLoginPage() {
 
   return (
     <LoginShell legal={legal}>
-      {renderLoginTemplate(masterLoginSystemConfig, async (values) => {
-        console.info("login submit", values);
-        await new Promise((r) => setTimeout(r, 400));
-      })}
+      {renderLoginTemplate(masterLoginSystemConfig)}
     </LoginShell>
   );
 }

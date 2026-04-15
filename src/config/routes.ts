@@ -37,3 +37,14 @@ export const LOGIN_PATHS_PLANNED: Partial<Record<LoginRouteSystemId, string>> = 
   asset: LOGIN_PATHS.asset,
   master: LOGIN_PATHS.master,
 };
+
+/** 忘记密码流程入口（与登录同源系统 id 对齐，便于返回登录） */
+export const FORGOT_PASSWORD_PATHS: Record<LoginRouteSystemId, string> = {
+  wms: "/forgot-password/wms",
+  tms: "/forgot-password/tms",
+  crm: "/forgot-password/crm",
+  hr: "/forgot-password/hr",
+  bms: "/forgot-password/bms",
+  asset: "/forgot-password/asset",
+  master: "/forgot-password/master",
+};

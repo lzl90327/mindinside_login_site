@@ -1,5 +1,6 @@
 import { BrandMark } from "@/components/brand/BrandMark";
 import { LoginCard } from "@/components/cards/LoginCard";
+import { useLoginExtensions } from "@/hooks/useLoginExtensions";
 import type { TemplateLoginPageProps } from "@/types/login-system";
 import "./TemplateCLoginPage.css";
 
@@ -7,7 +8,8 @@ import "./TemplateCLoginPage.css";
  * 模板 C：单卡绝对主焦点 + 轻量抽象秩序底（冻结定义见 orchestrator）。
  * 供 BMS、HR、资产等 C 系复用；不做模板 A 式强主视觉叙事分栏。
  */
-export function TemplateCLoginPage({ config, onSubmit }: TemplateLoginPageProps) {
+export function TemplateCLoginPage({ config }: TemplateLoginPageProps) {
+  const ext = useLoginExtensions(config);
   const showHeroImage = !config.hero.abstractOnly;
 
   return (
@@ -37,8 +39,11 @@ export function TemplateCLoginPage({ config, onSubmit }: TemplateLoginPageProps)
           systemName={config.systemName}
           subtitle={config.subtitle}
           fields={config.fields}
+          defaultValues={ext.defaultValues}
           submitButtonLabel={config.submitButtonLabel}
-          onSubmit={onSubmit}
+          onSubmit={ext.handleSubmit}
+          rememberMe={ext.rememberMe}
+          forgotPassword={ext.forgotPassword}
         />
       </div>
     </div>

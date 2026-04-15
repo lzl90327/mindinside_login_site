@@ -10,10 +10,7 @@ export function BMSLoginPage() {
 
   return (
     <LoginShell legal={legal}>
-      {renderLoginTemplate(bmsLoginSystemConfig, async (values) => {
-        console.info("login submit", values);
-        await new Promise((r) => setTimeout(r, 400));
-      })}
+      {renderLoginTemplate(bmsLoginSystemConfig)}
     </LoginShell>
   );
 }

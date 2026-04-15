@@ -149,6 +149,57 @@
   gap: var(--s-1);
 }
 
+.login-card__remember-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 4px;
+}
+
+.login-card__remember-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #3d4a5c;
+  cursor: pointer;
+  user-select: none;
+}
+
+.login-card__remember-label input {
+  width: 16px;
+  height: 16px;
+  accent-color: #1f6fd0;
+  cursor: pointer;
+}
+
+.login-card__remember-hint {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7a8799;
+  letter-spacing: 0.02em;
+}
+
+.login-card__forgot-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f6fd0;
+  text-decoration: none;
+}
+
+.login-card__forgot-link:hover {
+  text-decoration: underline;
+}
+
+.login-card__forgot-link:focus-visible {
+  outline: 2px solid rgba(31, 111, 208, 0.35);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .login-card__row--meta {
   flex-wrap: wrap;
   justify-content: flex-end;

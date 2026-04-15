@@ -38,6 +38,14 @@ export type LoginTabMetaConfig = {
   favicon?: string;
 };
 
+/** 登录扩展能力开关；缺省时按冻结 §6 视为全开 */
+export type LoginExtensionsConfig = {
+  /** E-1 记住账号密码 */
+  rememberCredentials?: boolean;
+  /** E-2 忘记密码 */
+  forgotPassword?: boolean;
+};
+
 export type LoginSystemConfig = {
   id: string;
   template: LoginTemplateId;
@@ -49,6 +57,7 @@ export type LoginSystemConfig = {
   submitButtonLabel: string;
   legal: LoginLegalConfig;
   meta: LoginTabMetaConfig;
+  extensions?: LoginExtensionsConfig;
 };
 
 export type ResolvedLegal = {
@@ -59,5 +68,4 @@ export type ResolvedLegal = {
 
 export type TemplateLoginPageProps = {
   config: LoginSystemConfig;
-  onSubmit: (values: Record<string, string>) => void | Promise<void>;
 };

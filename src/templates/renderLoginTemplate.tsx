@@ -3,11 +3,8 @@ import { TemplateALoginPage } from "@/templates/template-a/TemplateALoginPage";
 import { TemplateBLoginPage } from "@/templates/template-b/TemplateBLoginPage";
 import { TemplateCLoginPage } from "@/templates/template-c/TemplateCLoginPage";
 
-export function renderLoginTemplate(
-  config: LoginSystemConfig,
-  onSubmit: TemplateLoginPageProps["onSubmit"],
-) {
-  const props: TemplateLoginPageProps = { config, onSubmit };
+export function renderLoginTemplate(config: LoginSystemConfig) {
+  const props: TemplateLoginPageProps = { config };
   switch (config.template) {
     case "A":
       return <TemplateALoginPage {...props} />;

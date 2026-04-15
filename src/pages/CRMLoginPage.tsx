@@ -10,10 +10,7 @@ export function CRMLoginPage() {
 
   return (
     <LoginShell legal={legal}>
-      {renderLoginTemplate(crmLoginSystemConfig, async (values) => {
-        console.info("login submit", values);
-        await new Promise((r) => setTimeout(r, 400));
-      })}
+      {renderLoginTemplate(crmLoginSystemConfig)}
     </LoginShell>
   );
 }
